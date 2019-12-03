@@ -1,31 +1,80 @@
 let mainCanvas;
 let context;
-let lineWidthInput = 1;
-let arrayOfPoints = [];
-function drawCurve(arrayToDraw){
+let arrayOfControlPoints = [];
+let arrayOfLinePoints = [];
+let count=2;
+let animate = true;
+let collisionLines = [];
+function drawFromCount(linesToDraw){
+    for(i=0;i<linesToDraw;i++){
+        context.beginPath();
+        context.moveTo(arrayOfLinePoints[count-2],arrayOfLinePoints[count-1]);
+        context.lineTo(arrayOfLinePoints[count],arrayOfLinePoints[count+1]);
+        checkCollision(Math.trunc(arrayOfLinePoints[count]),Math.trunc(arrayOfLinePoints[count+1]));
+        context.stroke();
+        count+=2;
+    }
+}
+function animateDrawCurve(){
+    drawFromCount(5);
+    if(count<arrayOfLinePoints.length && animate){
+        document.getElementById("drawButton").disabled = true;
+        document.getElementById("drawButton").style.opacity = 0.5;
+        requestAnimationFrame(animateDrawCurve);
+    }
+    else{
+        arrayOfControlPoints = [];
+        arrayOfLinePoints = [];
+        document.getElementById("drawButton").disabled = false;
+        document.getElementById("drawButton").style.opacity = 1;
+    }
+}
+function createCurveArray(arrControlPoints){
     let parArray = [];
-    arrayToDraw.forEach(element => {
+    arrControlPoints.forEach(element => {
         parArray.push(element);
     });
     let chngArray;
-    context.beginPath();
     context.strokeStyle = "#1DB954";
-    for(t=0;t<=1.0;t+=0.01){
+    for(t=0;t<=1.0;t+=0.001){
         chngArray = reduceArray(parArray,t);
-        context.lineTo(chngArray[0],chngArray[1]);
+        arrayOfLinePoints.push(chngArray[0]);
+        arrayOfLinePoints.push(chngArray[1]);
     }
-    context.stroke();
-
+    count = 2;
+    animateDrawCurve(arrayOfLinePoints);
+}
+function drawCurve(arrayToDraw){
+    for(i=2;i<arrayToDraw.length;i+=2){
+        context.beginPath();
+        context.moveTo(arrayToDraw[i-2],arrayToDraw[i-1]);
+        context.lineTo(arrayToDraw[i],arrayToDraw[i+1]);
+        context.stroke();
+    }
+}
+function checkCollision(x,y){
+  /*  if((1000-0)*(y-0)-(1000-0)*(x-0) < 2000 && (1000-0)*(y-0)-(1000-0)*(x-0) > -2000){
+        animate = false;
+    }*/
+}
+function createCollisions(){
+    collisionLines = returnStage1();
+    for(i=0;i<collisionLines.length;i+=4){
+        drawCurve([collisionLines[i],collisionLines[i+1],collisionLines[i+2],collisionLines[i+3]]);
+    }
 }
 function mouseDownFunction(e){
-    arrayOfPoints.push(e.offsetX);
-    arrayOfPoints.push(e.offsetY);
-    context.beginPath();
-    context.arc(e.offsetX, e.offsetY, 10, 0, 2 * Math.PI, false);
-    context.fillStyle = "#1DB954";
-    context.strokeStyle = "#1DB954";
-    context.fill();
-    context.stroke();
+    if(e.button == 0){
+        arrayOfControlPoints.push(e.offsetX);
+        arrayOfControlPoints.push(e.offsetY);
+        context.beginPath();
+        context.arc(e.offsetX, e.offsetY, 10, 0, 2 * Math.PI, false);
+        context.fillStyle = "#1DB954";
+        context.strokeStyle = "#1DB954";
+        context.fill();
+        context.stroke();
+        console.log(e.offsetX,e.offsetY);
+    }
 }
 function reduceArray(array,t){
     let newArray = [];
@@ -45,10 +94,13 @@ function initalizeCanvas(){
     mainCanvas.width = mainCanvas.clientWidth;
     mainCanvas.height = mainCanvas.clientHeight;
     context = mainCanvas.getContext("2d"); 
+   /* context.moveTo(0,0);
+    context.lineTo(1000,1000)
+    context.stroke();*/
     mainCanvas.addEventListener("mousedown",function(e){
         mouseDownFunction(e);
     });
-    context.lineWidth = 1;
+    context.lineWidth = 3;
     
 }
 function onCanvasResize(){
@@ -57,6 +109,7 @@ function onCanvasResize(){
 }
 window.onload = function(){
     this.initalizeCanvas();
+    //this.createCollisions();
 }
 window.onresize = function(){
     this.onCanvasResize();

@@ -19,6 +19,7 @@
     box-sizing: border-box;
 }
 #controls{
+    margin-top:2%;
     display: flex;
     justify-content: center;
 }
@@ -32,4 +33,9 @@ button{
     font-family: 'Montserrat',sans-serif;
     color: #FFFFFF;
     font-size: 30px;
+}
+#drawButton{
+    opacity: 1;
+    transition: 0.5;
+
 }
