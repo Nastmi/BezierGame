@@ -10,14 +10,12 @@ function drawFromCount(linesToDraw){
         context.beginPath();
         context.moveTo(arrayOfLinePoints[count-2],arrayOfLinePoints[count-1]);
         context.lineTo(arrayOfLinePoints[count],arrayOfLinePoints[count+1]);
-        checkCollision(Math.trunc(arrayOfLinePoints[count]),Math.trunc(arrayOfLinePoints[count+1]));
         context.stroke();
         count+=2;
     }
 }
 function animateDrawCurve(){
-	console.log(3);
-    drawFromCount(5);
+    drawFromCount(15);
     if(count<arrayOfLinePoints.length && animate){
         document.getElementById("drawButton").disabled = true;
         document.getElementById("drawButton").style.opacity = 0.5;
@@ -28,10 +26,10 @@ function animateDrawCurve(){
         arrayOfLinePoints = [];
         document.getElementById("drawButton").disabled = false;
         document.getElementById("drawButton").style.opacity = 1;
+        animate = true;
     }
 }
 function createCurveArray(arrControlPoints){
-	console.log(1);
     let parArray = [];
     arrControlPoints.forEach(element => {
         parArray.push(element);
@@ -42,6 +40,8 @@ function createCurveArray(arrControlPoints){
         chngArray = reduceArray(parArray,t);
         arrayOfLinePoints.push(chngArray[0]);
         arrayOfLinePoints.push(chngArray[1]);
+        if(checkCollision(chngArray[0],chngArray[1]))
+            break;
     }
     count = 2;
     animateDrawCurve(arrayOfLinePoints);
@@ -56,11 +56,29 @@ function drawCurve(arrayToDraw){
 }
 function checkCollision(x,y){
 	for(let i=0;i<collisionLines.length;i+=4){
-		if((y-collisionLines[i+1])*(collisionLines[i+2]-collisionLines[i])-(x-collisionLines[i])*(collisionLines[i+3]-collisionLines[i+1]) < 1000 && (y-collisionLines[i+1])*(collisionLines[i+2]-collisionLines[i])-(x-collisionLines[i])*(collisionLines[i+3]-collisionLines[i+1]) > -1000){
-			animate = false;
-		}
-	}
-    
+		if(isBetween(Math.trunc(collisionLines[i]),Math.trunc(collisionLines[i+1]),Math.trunc(collisionLines[i+2]),Math.trunc(collisionLines[i+3]),Math.trunc(x),Math.trunc(y)))
+            return true;
+    }
+    return false;
+}
+function isBetween(x1,y1,x2,y2,x3,y3){
+    /*let crossProduct = (y3-y1)*(x2-x1)-(x3-x1)*(y2-y1);
+    let dotProduct = (x3-x1)*(x2-x1)+(y3-y1)*(y2-y1);
+    let squaredLength = Math.pow((x2-x1),2)+Math.pow(y2-y1,2);
+    if(Math.abs(crossProduct) != 0)
+        return false;
+    if(dotProduct < 0)
+        return false
+    if(dotProduct > squaredLength)
+        return false
+    return true;*/
+    for(let t=0;t<=1.0;t+=0.001){
+        let chngArray = reduceArray([x1,y1,x2,y2],t);
+        if(Math.trunc(x3) == Math.trunc(chngArray[0]) && Math.trunc(y3) == Math.trunc(chngArray[1]))
+            return true;
+    }
+    return false;
+
 }
 function createCollisions(){
     collisionLines = returnStage(1);
@@ -79,7 +97,6 @@ function mouseDownFunction(e){
         context.strokeStyle = "#1DB954";
         context.fill();
         context.stroke();
-        console.log(e.offsetX,e.offsetY);
     }
 }
 function reduceArray(array,t){
