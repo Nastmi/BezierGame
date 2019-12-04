@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>Nike</title>
+        <link rel="stylesheet" type="text/css" href="css/styleGame.css"/>
+        <script src="js/script.js"></script>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400&display=swap" rel="stylesheet"> 
+    </head> 
+    <body >
+        <div id="wrap"> 
+            <div id="drawing">
+                <canvas id="drawCanvas">
+                </canvas>
+            </div>
+            <div id="controls">
+                <button id="drawButton" onclick="createCurveArray(arrayOfControlPoints)">Draw</button>
+                <button onclick="reset()">Reset</button>
+                <button onclick="next()">Next</button>
+            </div>
+        </div>
+    </body>
+    
+</html>
