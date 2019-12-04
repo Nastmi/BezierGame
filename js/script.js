@@ -163,9 +163,9 @@ window.onresize = function(){
 function returnStage(stageNum){
     console.log(stageNum);
 	if(stageNum == 1){
-        startPoint = {x:250*scaleX,y:200*scaleY};
-        endPoint = {x:1750*scaleX,y:200*scaleY};
-        return [960*scaleX,894*scaleY,960*scaleX,400*scaleY];
+        startPoint = {x:250*scaleX,y:600*scaleY};
+        endPoint = {x:1750*scaleX,y:600*scaleY};
+        return [960*scaleX,894*scaleY,960*scaleX,350*scaleY];
     }
     else if(stageNum == 2){
         startPoint = {x:250*scaleX,y:200*scaleY};
