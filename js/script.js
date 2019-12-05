@@ -9,6 +9,7 @@ let scaleY = 1;
 let startPoint;
 let endPoint;
 let currentStage = 1;
+let win;
 function drawFromCount(linesToDraw){
     for(let i=0;i<linesToDraw;i++){
         context.beginPath();
@@ -28,9 +29,13 @@ function animateDrawCurve(){
     else{
         arrayOfControlPoints = [];
         arrayOfLinePoints = [];
-        document.getElementById("drawButton").disabled = false;
-        document.getElementById("drawButton").style.opacity = 1;
-        animate = true;
+        if(win == true){
+            document.getElementById("nextButton").style.opacity = 1;
+            document.getElementById("nextButton").disabled = false;
+        }
+        if(win == false){
+            
+        }
     }
 }
 function createCurveArray(arrControlPoints){
@@ -44,8 +49,11 @@ function createCurveArray(arrControlPoints){
         chngArray = reduceArray(parArray,t);
         arrayOfLinePoints.push(chngArray[0]);
         arrayOfLinePoints.push(chngArray[1]);
-        if(checkCollision(chngArray[0],chngArray[1]))
+        if(checkCollision(chngArray[0],chngArray[1])){
+            win = false;
             break;
+        }
+        win = true;
     }
     count = 2;
     animateDrawCurve(arrayOfLinePoints);
@@ -88,6 +96,8 @@ function isBetween(x1,y1,x2,y2,x3,y3){
 
 }
 function createStage(){
+    document.getElementById("nextButton").disabled = true;
+    document.getElementById("nextButton").style.opacity = 0.5;
     context.lineWidth = 6;
     collisionLines = returnStage(currentStage);
 	context.strokeStyle = "#FFFFFF"
@@ -177,6 +187,8 @@ function returnStage(stageNum){
 }
 function reset(){
     context.clearRect(0,0,mainCanvas.clientWidth,mainCanvas.clientHeight);
+    document.getElementById("drawButton").disabled = false;
+    document.getElementById("drawButton").style.opacity = 1;
     arrayOfControlPoints = [];
     arrayOfLinePoints = [];
     collisionLines = [];
