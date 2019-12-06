@@ -27,14 +27,11 @@ function animateDrawCurve(){
         requestAnimationFrame(animateDrawCurve);
     }
     else{
-        arrayOfControlPoints = [];
-        arrayOfLinePoints = [];
         if(win == true){
             document.getElementById("nextButton").style.opacity = 1;
             document.getElementById("nextButton").disabled = false;
         }
         if(win == false){
-            
         }
     }
 }

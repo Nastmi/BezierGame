@@ -2,6 +2,10 @@
     margin:0;
     padding: 0;
 }
+body{
+    font-family: 'Montserrat',sans-serif;
+    font-weight: 300;
+}
 #wrap{
     background-color: #191414;
     display: flex;
@@ -25,27 +29,36 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center; 
-    padding:10px;
+}
+.bottom{
+    display: flex;
+    flex-direction: row;
+    width:33%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
 }
 button{
     box-sizing: border-box;
     background-color: #1DB954;
     border-radius: 50px;
     border:none;
-    padding: 4px;
     width: 150px;
     height: 75px;
-    font-family: 'Montserrat',sans-serif;
     color: #FFFFFF;
-    font-size: 30px;
-    margin: 10px;
+    font-size: 32px;
+    margin: 4px;
 }
 #drawButton{
     opacity: 1;
 }
 #title{
-    font-family: 'Montserrat',sans-serif;
+    
     color:white;
     font-size: 100px;
+}
+#numPoints{
+    color: #FFFFFF;
+    font-size: 32px;
+    
 }
