@@ -20,7 +20,7 @@ button{
     width: 300px;
     height: 150px;
     color: #FFFFFF;
-    font-size: 80px;
+    font-size: 60px;
     transition: ease-in .2s, width ease-in .1s, height ease-in .1s, font-size ease-in .1s;
     outline: none;
 }

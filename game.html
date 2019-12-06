@@ -35,6 +35,10 @@
         <script>
             window.onload = function(){
             sequence = parseInt(localStorage.getItem("sequence"));
+            currentStage = parseInt(localStorage.getItem("stage"));
+            if(currentStage != 0){
+                document.getElementById("score").innerHTML = "Score: "+parseInt(localStorage.getItem("score"));
+            }
             this.initalizeCanvas();
             this.createStage();
             }

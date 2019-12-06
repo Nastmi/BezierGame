@@ -11,7 +11,6 @@ let endPoint;
 let currentStage = 0;
 let win;
 let pointsLeft = 0;
-let previousScore;
 let score = 0;
 let sequence = 0;
 console.log("did stuff");
@@ -231,7 +230,9 @@ function reset(){
 }
 function next(){
     currentStage+=1;
-    score+=(500-pointsLeft*50)
+    score+=(500-pointsLeft*50);
+    localStorage.setItem("stage",currentStage);
+    localStorage.setItem("score",score);
     document.getElementById("score").innerHTML = "Score: "+score;
     reset();
 }
