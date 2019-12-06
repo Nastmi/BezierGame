@@ -24,7 +24,7 @@ function drawFromCount(linesToDraw){
     }
 }
 function animateDrawCurve(){
-    drawFromCount(300);
+    drawFromCount(50);
     if(count<arrayOfLinePoints.length){
         document.getElementById("drawButton").disabled = true;
         document.getElementById("drawButton").style.opacity = 0.5;
@@ -37,13 +37,13 @@ function animateDrawCurve(){
             document.getElementById("nextButton").style.opacity = 1;
             document.getElementById("nextButton").disabled = false;
             document.getElementById("info").style.color = "#1DB954";
-            document.getElementById("info").innerHTML = "Won! Press next";
+            document.getElementById("info").innerHTML = "You won! Press next";
             document.getElementById("resetButton").disabled = false;
             document.getElementById("resetButton").style.opacity = 1;
         }
         if(win == false){
             document.getElementById("info").style.color = "#FF0000";
-            document.getElementById("info").innerHTML = "Lost! Press reset";
+            document.getElementById("info").innerHTML = "You lost! Press reset";
             document.getElementById("resetButton").disabled = false;
             document.getElementById("resetButton").style.opacity = 1;
         }
@@ -266,7 +266,7 @@ function returnText(seq){
     }
     else if(seq == 3){
         return {
-            text:"By pressing right click, you will be able to draw control points",
+            text:"By pressing left click, you will be able to draw control points",
             x:530*scaleX,
             y:187*scaleY,
         }   
