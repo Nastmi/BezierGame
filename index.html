@@ -5,6 +5,7 @@
         <title>Nike</title>
         <link rel="stylesheet" type="text/css" href="css/styleMenu.css"/>
         <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400&display=swap" rel="stylesheet"> 
+        <script src="js/script.js"></script>
     </head> 
     <body >
         <div id="wrap"> 
@@ -12,10 +13,10 @@
                 Bezier game
             </div>
             <div id="play">
-                <button onclick="location.href = 'game.html'">Play</button>
+                <button onclick="location.href = 'game.html';localStorage.setItem('sequence',8)">Play</button>
             </div>
-            <div>
-
+            <div id="play">
+                <button onclick="location.href = 'game.html';localStorage.setItem('sequence',0)">Tutorial</button>
             </div>
         </div>
     </body>

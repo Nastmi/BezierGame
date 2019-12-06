@@ -2,6 +2,9 @@
     margin:0;
     padding: 0;
 }
+body{
+    font-family: 'Montserrat',sans-serif;
+}
 #wrap{
     background-color: #191414;
     display: flex;
@@ -16,22 +19,27 @@ button{
     padding: 4px;
     width: 300px;
     height: 150px;
-    font-family: 'Montserrat',sans-serif;
     color: #FFFFFF;
     font-size: 80px;
+    transition: ease-in .2s, width ease-in .1s, height ease-in .1s, font-size ease-in .1s;
+    outline: none;
+}
+button:hover{
+    width: 340px;
+    height: 190px;
+    font-size: 98px;
 }
 #title{
     height: 20%;
     margin-top: 20px;
     display: flex;
     justify-content: center;
-    font-family: 'Montserrat',sans-serif;
     color:white;
     font-size: 100px;
 }
 #play{
     display: flex;
     justify-content: center;
-    height: 40%;
+    height: 30%;
     margin-top:30px;
 }

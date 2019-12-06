@@ -9,24 +9,39 @@
     </head> 
     <body >
         <div id="wrap"> 
+            <div id="stageName">
+                <div class="threeFlex" style="justify-content: left;" onclick="location.href = 'index.html'"><button  id="backButton">&lt;</button></div>
+                <div class="threeFlex" style="font-size:20px" id="stageNameDiv">Stage 1</div>
+                <div class="threeFlex" id="info" style="font-size:20px">Draw!</div>
+            </div>
             <div id="drawing">
                 <canvas id="drawCanvas">
                 </canvas>
             </div>
             <div id="controls">
-                <div class="bottom">
-                    <span id="numPoints">1000</span>
+                <div class="threeFlex">
+                    <span id="numPoints">Points left: 1000</span>
                 </div>
-                <div class="bottom">
-                    <button id="drawButton" onclick="createCurveArray(arrayOfControlPoints)">Draw</button>
-                    <button onclick="reset()">Reset</button>
+                <div class="threeFlex">
+                    <button id="drawButton" onclick="createCurveArray(arrayOfControlPoints);animateDrawCurve(arrayOfLinePoints);">Draw</button>
+                    <button onclick="reset()" id="resetButton">Reset</button>
                     <button id="nextButton" onclick="next()">Next</button>
                 </div>
-                <div class="bottom">
-
+                <div class="threeFlex">
+                    <span id="score" style="font-size: 32px;">Score: 0</span>
                 </div>
             </div>
         </div>
+        <script>
+            window.onload = function(){
+            sequence = parseInt(localStorage.getItem("sequence"));
+            this.initalizeCanvas();
+            this.createStage();
+            }
+            window.onresize = function(){
+                this.onCanvasResize();
+            }
+        </script>
     </body>
     
 </html>
