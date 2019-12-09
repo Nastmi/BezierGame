@@ -13,6 +13,7 @@ let win;
 let pointsLeft = 0;
 let score = 0;
 let sequence = 0;
+let color = "#1DB954";
 console.log("did stuff");
 function drawFromCount(linesToDraw){
     for(let i=0;i<linesToDraw;i++){
@@ -55,7 +56,7 @@ function createCurveArray(arrControlPoints){
         parArray.push(element);
     });
     let chngArray;
-    context.strokeStyle = "#1DB954";
+    context.strokeStyle = color;
     for(let t=0;t<=1.0;t+=0.0001){
         chngArray = reduceArray(parArray,t);
         arrayOfLinePoints.push(chngArray[0]);
@@ -119,8 +120,8 @@ function createStage(){
     for(let i=0;i<collisionLines.length;i+=4){
         drawCurve([collisionLines[i],collisionLines[i+1],collisionLines[i+2],collisionLines[i+3]]);
     }
-    context.fillStyle = "#1DB954";
-    context.strokeStyle = "#1DB954";
+    context.fillStyle = color;
+    context.strokeStyle = color;
     context.beginPath();
     context.arc(startPoint.x, startPoint.y, 10, 0, 2 * Math.PI, false);
     context.fill();
@@ -141,9 +142,9 @@ function mouseDownFunction(e){
             arrayOfControlPoints.splice(arrayOfControlPoints.length-2,0,e.offsetY);
             context.beginPath();
             context.arc(e.offsetX, e.offsetY, 10, 0, 2 * Math.PI, false);
-            context.fillStyle = "#1DB954";
-            context.strokeStyle = "#1DB954";
-            context.fill();
+            context.fillStyle = color;
+            context.strokeStyle = color;
+			context.fill();
             context.stroke();
             pointsLeft--;
             document.getElementById("numPoints").innerHTML = "Points left: "+pointsLeft;
