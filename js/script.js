@@ -37,14 +37,12 @@ function animateDrawCurve(){
         if(win == true){
             document.getElementById("nextButton").style.opacity = 1;
             document.getElementById("nextButton").disabled = false;
-            document.getElementById("info").style.color = "#1DB954";
-            document.getElementById("info").innerHTML = "You won! Press next";
+            drawText("win");
             document.getElementById("resetButton").disabled = false;
             document.getElementById("resetButton").style.opacity = 1;
         }
         if(win == false){
-            document.getElementById("info").style.color = "#FF0000";
-            document.getElementById("info").innerHTML = "You lost! Press reset";
+            drawText("lose");
             document.getElementById("resetButton").disabled = false;
             document.getElementById("resetButton").style.opacity = 1;
         }
@@ -103,7 +101,7 @@ function createStage(){
         document.getElementById("drawButton").style.opacity = 0.5;
         document.getElementById("resetButton").disabled = true;
         document.getElementById("resetButton").style.opacity = 0.5;
-        drawText(10000);
+        drawText("end");
     }
     document.getElementById("drawButton").disabled = false;
     document.getElementById("drawButton").style.opacity = 1;
@@ -239,7 +237,15 @@ function next(){
 }
 function drawText(curSeq){
     context.font = (30*scaleX)+"px Montserrat";
-    context.fillStyle = "#FFFFFF";
+    if(curSeq == "win"){
+        context.fillStyle = "#1DB954";
+    }
+    else if(curSeq == "lose"){
+        context.fillStyle = "#FF0000";
+    }
+    else{
+        context.fillStyle = "#FFFFFF";
+    }
     let textToDraw = returnText(curSeq);
     context.fillText(textToDraw.text,textToDraw.x,textToDraw.y);
 }
@@ -300,12 +306,26 @@ function returnText(seq){
             y:730*scaleY,
         }   
     }
-    else if(seq == 10000){
+    else if(seq == "end"){
         return {
             text:"You win, your score was "+score,
             x:780*scaleX,
             y:375*scaleY,
         }   
+    }
+    else if(seq == "win"){
+        return{
+            text:"You win! Press next",
+            x:810*scaleX,
+            y:200*scaleY
+        }
+    }
+    else if(seq == "lose"){
+        return{
+            text:"You lose! Press reset",
+            x:810*scaleX,
+            y:200*scaleY
+        }
     }
 }
 function changeSeq(seq){

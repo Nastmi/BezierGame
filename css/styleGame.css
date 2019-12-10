@@ -55,7 +55,7 @@ button{
     font-size: 28px;
     margin: 4px;
     opacity: 1;
-    transition: ease-in .2s, width ease-in .1s, height ease-in .1s, font-size ease-in .1s;
+    transition: ease-in .2s, width ease-in .2s, height ease-in .2s, font-size ease-in .2s;
     outline: none;
     font-family: 'Montserrat',sans-serif;
     color:#FFFFFF;

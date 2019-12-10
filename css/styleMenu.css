@@ -21,13 +21,13 @@ button{
     height: 150px;
     color: #FFFFFF;
     font-size: 60px;
-    transition: ease-in .2s, width ease-in .1s, height ease-in .1s, font-size ease-in .1s;
+    transition: ease-in .2s, width ease-in .2s, height ease-in .2s, font-size ease-in .2s;
     outline: none;
 }
 button:hover{
-    width: 340px;
-    height: 190px;
-    font-size: 90px;
+    width: 320px;
+    height: 170px;
+    font-size: 70px;
 }
 #title{
     height: 20%;
